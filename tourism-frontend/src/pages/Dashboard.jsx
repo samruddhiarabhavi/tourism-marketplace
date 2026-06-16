@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import "./Dashboard.css";
 
+
 function Dashboard() {
   const[users, setUsers] = useState(0);
   const[bookings, setbookings] = useState(50);
   const[destinations, setDestinations] = useState(25);
+  
   useEffect(() => {
      setUsers(150);
   }, []);
