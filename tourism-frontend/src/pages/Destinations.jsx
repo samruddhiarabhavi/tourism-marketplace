@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Layout from "../components/Layout";
 function Destinations() {
   
     const [destinations, setDestinations] = useState([]);
@@ -47,7 +48,7 @@ function Destinations() {
 };
 
   
-}
+
 const deleteDestination = async (id) => {
 
   const response = await fetch(
@@ -65,8 +66,41 @@ const deleteDestination = async (id) => {
     .then(res => res.json())
     .then(data => setDestinations(data));
 };
+const updateDestination = async () => {
+
+  const response = await fetch(
+    `http://localhost:5000/destinations/${editId}`,
+    {
+      method: "PUT",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        name,
+        location,
+        price
+      })
+    }
+  );
+
+  const data = await response.json();
+
+  alert(data.message);
+
+  setEditId(null);
+
+  setName("");
+  setLocation("");
+  setPrice("");
+
+  fetch("http://localhost:5000/destinations")
+    .then(res => res.json())
+    .then(data => setDestinations(data));
+};
     return(
-        
+        <Layout>
         <div>
             <h1>Destinations</h1>
             <h2>Add Destination</h2>
@@ -74,9 +108,17 @@ const deleteDestination = async (id) => {
             <input type="text" placeholder="destination location"value={location} onChange={(e) => setLocation(e.target.value)} />
             <input type="number" placeholder="destination price"value={price} onChange={(e) => setPrice(e.target.value)} />
 
-            <button onClick={addDestination}>
-                Add Destination
-              </button>
+            {
+  editId ? (
+    <button onClick={updateDestination}>
+      Update Destination
+    </button>
+  ) : (
+    <button onClick={addDestination}>
+      Add Destination
+    </button>
+  )
+}
                 <h2>Destination List</h2>
 
               {destinations.map((item) => (
@@ -107,7 +149,9 @@ const deleteDestination = async (id) => {
       
 
                    </div>
+                   </Layout>
                        );
+                      }
 
 
 

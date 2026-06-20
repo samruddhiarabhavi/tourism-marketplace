@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Layout from "../components/Layout";
 import "./Dashboard.css";
 
 
@@ -11,6 +12,7 @@ function Dashboard() {
      setUsers(150);
   }, []);
   return (
+    <Layout>
     <div className="dashboard">
 
       <aside className="sidebar">
@@ -60,6 +62,7 @@ function Dashboard() {
       </main>
 
     </div>
+    </Layout>
   );
 }
 

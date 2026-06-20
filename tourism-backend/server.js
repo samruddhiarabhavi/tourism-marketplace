@@ -30,6 +30,35 @@ app.post("/destinations",(req,res)=>{
         res.json({message:"Destination added successfully"})
     })
 })
+app.put("/destinations/:id", (req, res) => {
+
+  const id = req.params.id;
+
+  const { name, location, price } = req.body;
+
+  const sql = `
+    UPDATE destinations
+    SET name = ?, location = ?, price = ?
+    WHERE id = ?
+  `;
+
+  db.query(
+    sql,
+    [name, location, price, id],
+    (err, result) => {
+
+      if (err) {
+        return res.status(500).json(err);
+      }
+
+      res.json({
+        message: "Destination Updated"
+      });
+
+    }
+  );
+
+});
 app.delete("/destinations/:id", (req, res) => {
 
   const id = req.params.id;
