@@ -5,6 +5,7 @@ function Destinations() {
     const [name, setName] = useState("");
     const [location, setLocation] = useState("");
     const [price, setPrice] = useState("");
+    const[editId, setEditId] = useState(null);
 
     useEffect(() => {
         fetch("http://localhost:5000/destinations")
@@ -44,6 +45,9 @@ function Destinations() {
     .then(res => res.json())
     .then(data => setDestinations(data));
 };
+
+  
+}
 const deleteDestination = async (id) => {
 
   const response = await fetch(
@@ -71,28 +75,40 @@ const deleteDestination = async (id) => {
             <input type="number" placeholder="destination price"value={price} onChange={(e) => setPrice(e.target.value)} />
 
             <button onClick={addDestination}>
-  Add Destination
-</button>
-            <h2>Destination List</h2>
+                Add Destination
+              </button>
+                <h2>Destination List</h2>
 
-      {destinations.map((item) => (
-        <div key={item.id}>
-          <h3>{item.name}</h3>
-          <p>{item.location}</p>
-          <p>₹ {item.price}</p>
-          <button
-      onClick={() => deleteDestination(item.id)}
-    >
-      Delete
-    </button>
+              {destinations.map((item) => (
+              <div key={item.id}>
+              <h3>{item.name}</h3>
+              <p>{item.location}</p>
+              <p>₹ {item.price}</p>
+              <button
+              onClick={() => {
+
+                 setEditId(item.id);
+                  setName(item.name);
+                 setLocation(item.location);
+                 setPrice(item.price);
+
+                  }}
+              >
+                Edit
+                        </button>
+                  <button
+                    onClick={() => deleteDestination(item.id)}
+                       >
+                 Delete
+                  </button>
           
-        </div>
-      ))}
+                           </div>
+                   ))}
       
 
-    </div>
-  );
-}
+                   </div>
+                       );
+
 
 
 
