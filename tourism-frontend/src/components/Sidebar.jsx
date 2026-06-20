@@ -1,17 +1,18 @@
+import { Link } from "react-router-dom";
 function Sidebar(){
     return(
-        <div className="sidebar">
+        <div className="Sidebar">
             <h2> Tourism Admin</h2>
             <ul>
-                <li><link to="/">Dashboard</link>
+                <li><Link to="/">Dashboard</Link>
                 </li>
-                <li><link to="/destination">Destination</link>
+                <li><Link to="/destinations">Destination</Link>
                 </li>
-                <li><link to="/packages">Packages</link>
+                <li><Link to="/packages">Packages</Link>
                 </li>
-                <li><link to="/bookings">Bookings</link>
+                <li><Link to="/bookings">Bookings</Link>
                 </li>
-                <li><link to="/users">Users</link>
+                <li><Link to="/users">Users</Link>
                 </li>
             </ul>
 

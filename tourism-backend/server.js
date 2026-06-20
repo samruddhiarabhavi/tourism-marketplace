@@ -79,6 +79,39 @@ app.delete("/destinations/:id", (req, res) => {
   });
 
 });
+app.get("/packages", (req, res) => {
+  db.query(
+    "SELECT * FROM packages",
+    (err, result) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+
+      res.json(result);
+    }
+  );
+});
+app.post("/packages", (req, res) => {
+  const { package_name, duration, price } =
+    req.body;
+
+  const sql =
+    "INSERT INTO packages (package_name, duration, price) VALUES (?, ?, ?)";
+
+  db.query(
+    sql,
+    [package_name, duration, price],
+    (err, result) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+
+      res.json({
+        message: "Package Added",
+      });
+    }
+  );
+});
 app.listen(5000,()=>{
     console.log("server is running on port 5000");
 });

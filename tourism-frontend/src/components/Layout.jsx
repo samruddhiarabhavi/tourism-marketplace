@@ -1,17 +1,24 @@
-function Layout({children}){
-    return(
-        <div style ={{
-            display : "flex"
-        }}>
-            <sideBar/>
-            <div
-            style={{
+import Sidebar from "./Sidebar";
+
+function Layout({ children }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+      }}
+    >
+      <Sidebar />
+
+      <div
+        style={{
           padding: "20px",
           flex: 1,
-        }}>
-            {children}
-            </div>
-        </div>
-    )
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
 }
+
 export default Layout;
