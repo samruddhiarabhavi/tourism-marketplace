@@ -19,7 +19,7 @@ function Packages(){
             return;
         }
         const response = await fetch(
-            "https://localhost:5000/packages"
+            "https://localhost:5000/packages",
             {
                 method: "POST",
                 header:{
@@ -39,6 +39,26 @@ function Packages(){
         setLocation(""),
         setPrice(""),
         setName("")
+        fetch("http://localhost:5000/packages")
+    .then(res => res.json())
+    .then(data => setDestinations(data));
+    };
+
+    const deletePackage = async (id) => {
+        const respone = await fetch (
+            `http://localhost:5000/packages/${id}`,
+            {
+                method: "Delete"
+            }
+        );
+        const data = await response.json();
+
+  alert(data.message);
+
+  fetch("http://localhost:5000/destinations")
+    .then(res => res.json())
+    .then(data => setDestinations(data));
+    }
 
 
     }
