@@ -111,6 +111,16 @@ app.post("/packages", (req, res) => {
       });
     }
   );
+  app.get("/bookings", (req, res) => {
+    const sql = `SELEct bookings.id,bookings.customer_name, bookings.name, bookings.travel_date, bookings.persons FROM bookings OIN packages
+    ON bookings.package_id = packages.id`;
+    db.query(sql, (err, result) =>{
+      if (err) {
+        return res.status(500).json(err);
+      }
+      res.json(result);
+
+    })
 });
 app.listen(5000,()=>{
     console.log("server is running on port 5000");
